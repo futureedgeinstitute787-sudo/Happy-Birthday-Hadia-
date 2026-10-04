@@ -6,294 +6,45 @@
     <title>Happy Birthday Hadia ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0c0a1f, #1a1438, #2a1b4d);
-            font-family: 'Cormorant Garamond', serif;
-            color: #f8f1e3;
-            overflow-x: hidden;
-        }
-
-        /* Floating particles */
-        .particle {
-            position: fixed;
-            width: 5px;
-            height: 5px;
-            background: radial-gradient(circle, #ffd700, transparent);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float 9s infinite linear;
-            opacity: 0.5;
-            z-index: 1;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
-        }
-
-        /* Password Screen */
-        #password-screen {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at center, #1a1438, #0c0a1f);
-            z-index: 100;
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
-
-        #password-screen.hide {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .lock-card {
-            text-align: center;
-            padding: 50px 40px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 215, 0, 0.25);
-            border-radius: 24px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-            max-width: 420px;
-            width: 90%;
-        }
-
-        .lock-card h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: #ffd700;
-            margin-bottom: 12px;
-            letter-spacing: 2px;
-        }
-
-        .lock-card p {
-            font-size: 1.15rem;
-            color: #e8d9b5;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        #password-input {
-            width: 100%;
-            padding: 16px 20px;
-            font-size: 1.3rem;
-            border: none;
-            border-radius: 50px;
-            background: rgba(0, 0, 0, 0.4);
-            color: #ffd700;
-            text-align: center;
-            letter-spacing: 4px;
-            outline: none;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            transition: 0.3s;
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        #password-input:focus {
-            border-color: #ffd700;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
-        }
-
-        #unlock-btn {
-            margin-top: 25px;
-            padding: 14px 45px;
-            font-size: 1.2rem;
-            font-family: 'Playfair Display', serif;
-            background: linear-gradient(45deg, #c9a227, #ffd700, #e8c547);
-            color: #1a1a2e;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        #unlock-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-        }
-
-        .error {
-            color: #ff6b6b;
-            margin-top: 18px;
-            font-size: 1.1rem;
-            display: none;
-        }
-
-        /* Main Content */
-        #birthday-content {
-            display: none;
-            padding: 30px 20px 80px;
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 5;
-        }
-
-        #birthday-content.show {
-            display: block;
-            animation: fadeUp 1.2s ease;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Hero with Photo */
-        .hero {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.6rem, 8vw, 4rem);
-            background: linear-gradient(45deg, #ffd700, #fff8dc, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 6px;
-            letter-spacing: 2px;
-        }
-
-        .hero .name {
-            font-size: clamp(2rem, 6vw, 3rem);
-            color: #ffd700;
-            font-weight: 600;
-            letter-spacing: 4px;
-            margin-bottom: 25px;
-        }
-
-        /* Main Photo */
-        .main-photo {
-            width: 100%;
-            max-width: 420px;
-            margin: 0 auto 30px;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 0 6px rgba(255, 215, 0, 0.15);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .main-photo img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.6s ease;
-        }
-
-        .main-photo:hover img {
-            transform: scale(1.03);
-        }
-
-        /* Message Boxes */
-        .message-box {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,215,0,0.25);
-            border-radius: 22px;
-            padding: 30px;
-            margin: 25px 0;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        .message-box p {
-            font-size: 1.35rem;
-            line-height: 1.8;
-            color: #f0e6d2;
-            margin-bottom: 12px;
-        }
-
-        .message-box .highlight {
-            color: #ffd700;
-            font-weight: 600;
-        }
-
-        /* Quotes */
-        .quotes-section {
-            margin: 40px 0;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: #ffd700;
-            text-align: center;
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-        }
-
-        .quote-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,215,0,0.2);
-            border-radius: 18px;
-            padding: 25px;
-            margin-bottom: 18px;
-            transition: 0.3s;
-        }
-
-        .quote-card:hover {
-            border-color: rgba(255,215,0,0.5);
-            transform: translateX(6px);
-        }
-
-        .quote-card p {
-            font-size: 1.3rem;
-            line-height: 1.7;
-            font-style: italic;
-            color: #f5e6c8;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 25px;
-        }
-
-        .footer h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.7rem;
-            color: #ffd700;
-            margin-bottom: 8px;
-        }
-
-        .footer p {
-            font-size: 1.2rem;
-            color: #e8d9b5;
-        }
-
-        #confetti {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 50;
-        }
-
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2.3rem; }
-            .hero .name { font-size: 1.8rem; }
-            .message-box p { font-size: 1.2rem; }
-            .main-photo { max-width: 100%; }
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{min-height:100vh;background:linear-gradient(135deg,#0c0a1f,#1a1438,#2a1b4d);font-family:'Cormorant Garamond',serif;color:#f8f1e3;overflow-x:hidden}
+        .particle{position:fixed;width:5px;height:5px;background:radial-gradient(circle,#ffd700,transparent);border-radius:50%;pointer-events:none;animation:float 9s infinite linear;opacity:.5;z-index:1}
+        @keyframes float{0%{transform:translateY(100vh) rotate(0);opacity:0}10%{opacity:.6}90%{opacity:.5}100%{transform:translateY(-100px) rotate(720deg);opacity:0}}
+        #password-screen{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:radial-gradient(circle at center,#1a1438,#0c0a1f);z-index:100;transition:opacity .8s,visibility .8s}
+        #password-screen.hide{opacity:0;visibility:hidden;pointer-events:none}
+        .lock-card{text-align:center;padding:50px 40px;background:rgba(255,255,255,.05);backdrop-filter:blur(20px);border:1px solid rgba(255,215,0,.25);border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.5);max-width:420px;width:90%}
+        .lock-card h1{font-family:'Playfair Display',serif;font-size:2.2rem;color:#ffd700;margin-bottom:12px;letter-spacing:2px}
+        .lock-card p{font-size:1.15rem;color:#e8d9b5;margin-bottom:30px;line-height:1.6}
+        #password-input{width:100%;padding:16px 20px;font-size:1.3rem;border:none;border-radius:50px;background:rgba(0,0,0,.4);color:#ffd700;text-align:center;letter-spacing:4px;outline:none;border:1px solid rgba(255,215,0,.3);transition:.3s;font-family:'Cormorant Garamond',serif}
+        #password-input:focus{border-color:#ffd700;box-shadow:0 0 25px rgba(255,215,0,.3)}
+        #unlock-btn{margin-top:25px;padding:14px 45px;font-size:1.2rem;font-family:'Playfair Display',serif;background:linear-gradient(45deg,#c9a227,#ffd700,#e8c547);color:#1a1a2e;border:none;border-radius:50px;cursor:pointer;transition:.3s;font-weight:600;letter-spacing:1px}
+        #unlock-btn:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(255,215,0,.5)}
+        .error{color:#ff6b6b;margin-top:18px;font-size:1.1rem;display:none}
+        #birthday-content{display:none;padding:30px 20px 80px;max-width:900px;margin:0 auto;position:relative;z-index:5}
+        #birthday-content.show{display:block;animation:fadeUp 1.2s ease}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+        .hero{text-align:center;margin-bottom:40px}
+        .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,8vw,4rem);background:linear-gradient(45deg,#ffd700,#fff8dc,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;letter-spacing:2px}
+        .hero .name{font-size:clamp(2rem,6vw,3rem);color:#ffd700;font-weight:600;letter-spacing:4px;margin-bottom:25px}
+        .main-photo{width:100%;max-width:420px;margin:0 auto 30px;border-radius:24px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.5),0 0 0 6px rgba(255,215,0,.15);border:1px solid rgba(255,215,0,.3)}
+        .main-photo img{width:100%;height:auto;display:block;transition:transform .6s ease}
+        .main-photo:hover img{transform:scale(1.03)}
+        .message-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,215,0,.25);border-radius:22px;padding:30px;margin:25px 0;text-align:center;box-shadow:0 15px 40px rgba(0,0,0,.3)}
+        .message-box p{font-size:1.35rem;line-height:1.8;color:#f0e6d2;margin-bottom:12px}
+        .message-box .highlight{color:#ffd700;font-weight:600}
+        .quotes-section{margin:40px 0}
+        .section-title{font-family:'Playfair Display',serif;font-size:1.8rem;color:#ffd700;text-align:center;margin-bottom:25px;letter-spacing:2px}
+        .quote-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,215,0,.2);border-radius:18px;padding:25px;margin-bottom:18px;transition:.3s}
+        .quote-card:hover{border-color:rgba(255,215,0,.5);transform:translateX(6px)}
+        .quote-card p{font-size:1.3rem;line-height:1.7;font-style:italic;color:#f5e6c8}
+        .footer{text-align:center;margin-top:50px;padding:25px}
+        .footer h2{font-family:'Playfair Display',serif;font-size:1.7rem;color:#ffd700;margin-bottom:8px}
+        .footer p{font-size:1.2rem;color:#e8d9b5}
+        #confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+        @media(max-width:600px){.hero h1{font-size:2.3rem}.hero .name{font-size:1.8rem}.message-box p{font-size:1.2rem}.main-photo{max-width:100%}}
     </style>
 </head>
 <body>
-
-    <!-- Password Screen -->
     <div id="password-screen">
         <div class="lock-card">
             <h1>✨ A Special Surprise ✨</h1>
@@ -305,15 +56,13 @@
         </div>
     </div>
 
-    <!-- Birthday Content -->
     <div id="birthday-content">
         <div class="hero">
             <h1>Happy Birthday</h1>
             <div class="name">Hadia</div>
-
-            <!-- Main Photo of Hadia -->
             <div class="main-photo">
-                <img src="hadia.jpg" alt="Hadia - Happy Birthday">
+                <img src="data:image/jpeg;base64,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" alt="Hadia - Happy Birthday">
             </div>
         </div>
 
@@ -325,26 +74,14 @@
 
         <div class="quotes-section">
             <h2 class="section-title">Wishes For You</h2>
-
-            <div class="quote-card">
-                <p>“Keep shining always, Hadia. The world is better because you are in it.”</p>
-            </div>
-
-            <div class="quote-card">
-                <p>“More Dreams • More Achievements • More Happiness”</p>
-            </div>
-
-            <div class="quote-card">
-                <p>“A new chapter of your life begins... Stay blessed.”</p>
-            </div>
-
-            <div class="quote-card">
-                <p>“May this year bring you endless joy, beautiful surprises, and all the love your heart can hold.”</p>
-            </div>
+            <div class="quote-card"><p>“Keep shining always, Hadia. The world is better because you are in it.”</p></div>
+            <div class="quote-card"><p>“More Dreams • More Achievements • More Happiness”</p></div>
+            <div class="quote-card"><p>“A new chapter of your life begins... Stay blessed.”</p></div>
+            <div class="quote-card"><p>“May this year bring you endless joy, beautiful surprises, and all the love your heart can hold.”</p></div>
         </div>
 
         <div class="message-box">
-            <p style="font-size: 1.5rem; color: #ffd700;">You are a rare gem — beautiful inside and out.</p>
+            <p style="font-size:1.5rem;color:#ffd700">You are a rare gem — beautiful inside and out.</p>
             <p>Wishing you a year as elegant, bright and unforgettable as you are.</p>
             <p>May Allah bless you with health, happiness and endless smiles. Ameen 💛</p>
         </div>
@@ -358,107 +95,16 @@
     <canvas id="confetti"></canvas>
 
     <script>
-        // Particles
-        function createParticles() {
-            for (let i = 0; i < 30; i++) {
-                const p = document.createElement('div');
-                p.classList.add('particle');
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.animationDuration = (Math.random() * 7 + 6) + 's';
-                p.style.animationDelay = Math.random() * 6 + 's';
-                p.style.width = p.style.height = (Math.random() * 5 + 3) + 'px';
-                document.body.appendChild(p);
-            }
-        }
+        function createParticles(){for(let i=0;i<30;i++){const p=document.createElement('div');p.classList.add('particle');p.style.left=Math.random()*100+'vw';p.style.animationDuration=(Math.random()*7+6)+'s';p.style.animationDelay=Math.random()*6+'s';p.style.width=p.style.height=(Math.random()*5+3)+'px';document.body.appendChild(p)}}
         createParticles();
-
-        // Password
-        const correctPassword = "Hadia";
-        const passwordInput = document.getElementById('password-input');
-        const unlockBtn = document.getElementById('unlock-btn');
-        const errorMsg = document.getElementById('error-msg');
-        const passwordScreen = document.getElementById('password-screen');
-        const birthdayContent = document.getElementById('birthday-content');
-
-        function checkPassword() {
-            if (passwordInput.value.trim() === correctPassword) {
-                passwordScreen.classList.add('hide');
-                birthdayContent.classList.add('show');
-                setTimeout(() => {
-                    passwordScreen.style.display = 'none';
-                    burstConfetti();
-                }, 800);
-            } else {
-                errorMsg.style.display = 'block';
-                passwordInput.value = '';
-                passwordInput.focus();
-                setTimeout(() => errorMsg.style.display = 'none', 2500);
-            }
-        }
-
-        unlockBtn.addEventListener('click', checkPassword);
-        passwordInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter') checkPassword();
-        });
-
-        // Confetti
-        const canvas = document.getElementById('confetti');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let running = false;
-
-        function resize() {
-            canvas.width = innerWidth;
-            canvas.height = innerHeight;
-        }
-        resize();
-        addEventListener('resize', resize);
-
-        const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#ff9ff3', '#feca57', '#ffffff'];
-
-        function burstConfetti() {
-            for (let i = 0; i < 140; i++) {
-                particles.push({
-                    x: canvas.width/2 + (Math.random()-0.5)*180,
-                    y: canvas.height*0.35,
-                    vx: (Math.random()-0.5)*15,
-                    vy: -Math.random()*13 - 4,
-                    g: 0.25 + Math.random()*0.12,
-                    w: 5 + Math.random()*7,
-                    h: 4 + Math.random()*5,
-                    r: Math.random()*6,
-                    vr: (Math.random()-0.5)*0.35,
-                    c: colors[Math.floor(Math.random()*colors.length)],
-                    life: 150 + Math.random()*70
-                });
-            }
-            if (!running) {
-                running = true;
-                requestAnimationFrame(animate);
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles = particles.filter(p => p.life > 0 && p.y < canvas.height + 40);
-            particles.forEach(p => {
-                p.vy += p.g;
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vx *= 0.99;
-                p.r += p.vr;
-                p.life--;
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate(p.r);
-                ctx.globalAlpha = Math.min(1, p.life/45);
-                ctx.fillStyle = p.c;
-                ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
-                ctx.restore();
-            });
-            if (particles.length) requestAnimationFrame(animate);
-            else running = false;
-        }
+        const correctPassword="Hadia",passwordInput=document.getElementById('password-input'),unlockBtn=document.getElementById('unlock-btn'),errorMsg=document.getElementById('error-msg'),passwordScreen=document.getElementById('password-screen'),birthdayContent=document.getElementById('birthday-content');
+        function checkPassword(){if(passwordInput.value.trim()===correctPassword){passwordScreen.classList.add('hide');birthdayContent.classList.add('show');setTimeout(()=>{passwordScreen.style.display='none';burstConfetti()},800)}else{errorMsg.style.display='block';passwordInput.value='';passwordInput.focus();setTimeout(()=>errorMsg.style.display='none',2500)}}
+        unlockBtn.addEventListener('click',checkPassword);passwordInput.addEventListener('keypress',e=>{if(e.key==='Enter')checkPassword()});
+        const canvas=document.getElementById('confetti'),ctx=canvas.getContext('2d');let particles=[],running=false;
+        function resize(){canvas.width=innerWidth;canvas.height=innerHeight}resize();addEventListener('resize',resize);
+        const colors=['#ffd700','#ff6b6b','#4ecdc4','#ff9ff3','#feca57','#ffffff'];
+        function burstConfetti(){for(let i=0;i<140;i++){particles.push({x:canvas.width/2+(Math.random()-.5)*180,y:canvas.height*.35,vx:(Math.random()-.5)*15,vy:-Math.random()*13-4,g:.25+Math.random()*.12,w:5+Math.random()*7,h:4+Math.random()*5,r:Math.random()*6,vr:(Math.random()-.5)*.35,c:colors[Math.floor(Math.random()*colors.length)],life:150+Math.random()*70})}if(!running){running=true;requestAnimationFrame(animate)}}
+        function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles=particles.filter(p=>p.life>0&&p.y<canvas.height+40);particles.forEach(p=>{p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.r+=p.vr;p.life--;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.globalAlpha=Math.min(1,p.life/45);ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore()});if(particles.length)requestAnimationFrame(animate);else running=false}
     </script>
 </body>
 </html>
